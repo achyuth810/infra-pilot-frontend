@@ -1,66 +1,73 @@
 import { motion } from "framer-motion";
+import AppLayout from "../components/AppLayout";
 
 const page = {
   initial: { opacity: 0, y: 18 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -18 },
 };
-import AppLayout from "../components/AppLayout";
 
-export default function Home() {
-  return (
-    <AppLayout>
-      <div className="mx-auto max-w-6xl px-4 py-10 text-white">
-        {/* Your long scroll content + video sections go here */}
-        <div className="text-4xl font-semibold">Home</div>
-        <div className="mt-4 text-white/70">
-          Add your 4–5 scroll sections here.
-        </div>
-      </div>
-    </AppLayout>
-  );
-}
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 14 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+  viewport: { once: true, amount: 0.25 },
+});
 
 export default function About() {
   return (
-    <motion.div
-      variants={page}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.35 }}
-      className="min-h-[calc(100vh-72px)] bg-black text-white"
-    >
-      <div className="max-w-5xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-semibold">About InfraPilot Tech</h1>
+    <AppLayout>
+      <motion.div
+        variants={page}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: 0.35 }}
+        className="mx-auto max-w-6xl px-4 py-10 text-white"
+      >
+        <motion.h1 {...fadeUp(0)} className="text-4xl font-semibold">
+          About
+        </motion.h1>
+        <motion.p {...fadeUp(0.1)} className="mt-4 text-white/70 max-w-3xl">
+          InfraPilot Tech is a premium consultancy focused on building job-ready
+          profiles—resume, interviews, and strategy—delivered with a product-level
+          experience.
+        </motion.p>
 
-        <p className="mt-6 text-white/70 leading-relaxed">
-          We’re a consultancy focused on practical, high-quality delivery. Our approach is simple:
-          understand the goal, design the right solution, and execute with discipline.
-        </p>
-
-        <div className="mt-10 grid md:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="text-lg font-medium">What we value</div>
-            <ul className="mt-3 space-y-2 text-white/70 text-sm">
-              <li>• Clarity over complexity</li>
-              <li>• Reliability and security</li>
-              <li>• Performance and UX</li>
-              <li>• Sustainable systems</li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="text-lg font-medium">How we work</div>
-            <ul className="mt-3 space-y-2 text-white/70 text-sm">
-              <li>• Discovery → plan → build</li>
-              <li>• Weekly updates & deliverables</li>
-              <li>• Documentation + handover</li>
-              <li>• Long-term support options</li>
-            </ul>
-          </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              t: "Mission",
+              d: "Help candidates convert skills into offers with a clear plan.",
+            },
+            {
+              t: "Approach",
+              d: "Structured execution—review, optimize, practice, apply.",
+            },
+            {
+              t: "Quality",
+              d: "Premium outcomes with measurable improvement and confidence.",
+            },
+          ].map((x, i) => (
+            <motion.div
+              key={x.t}
+              {...fadeUp(0.1 + i * 0.05)}
+              className="glass rounded-3xl p-6"
+            >
+              <div className="text-lg font-semibold">{x.t}</div>
+              <div className="mt-2 text-white/70 text-sm">{x.d}</div>
+            </motion.div>
+          ))}
         </div>
-      </div>
-    </motion.div>
+
+        <motion.div {...fadeUp(0.2)} className="mt-12 glass rounded-3xl p-7">
+          <div className="text-2xl font-semibold">What you can edit later</div>
+          <p className="mt-3 text-white/70">
+            This page is a clean template—replace text with your finalized story,
+            add your photos/videos, and we can enhance with timeline/metrics.
+          </p>
+        </motion.div>
+      </motion.div>
+    </AppLayout>
   );
 }

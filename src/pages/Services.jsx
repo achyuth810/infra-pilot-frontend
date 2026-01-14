@@ -1,20 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import AppLayout from "../components/AppLayout";
-
-export default function Home() {
-  return (
-    <AppLayout>
-      <div className="mx-auto max-w-6xl px-4 py-10 text-white">
-        {/* Your long scroll content + video sections go here */}
-        <div className="text-4xl font-semibold">Home</div>
-        <div className="mt-4 text-white/70">
-          Add your 4–5 scroll sections here.
-        </div>
-      </div>
-    </AppLayout>
-  );
-}
 
 const page = {
   initial: { opacity: 0, y: 18 },
@@ -22,103 +7,80 @@ const page = {
   exit: { opacity: 0, y: -18 },
 };
 
-const container = {
-  animate: { transition: { staggerChildren: 0.08 } },
-};
-
-const card = {
+const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 14 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.35 } },
-};
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+  viewport: { once: true, amount: 0.25 },
+});
 
-const services = [
+const cards = [
   {
-    title: "Web Development",
-    desc: "Modern websites and web apps with React, performance optimization, and clean UI systems.",
-    items: ["Landing pages", "Dashboards", "Design systems", "SEO-ready builds"],
+    title: "Resume Optimization",
+    desc: "ATS-ready structure, impact bullets, and a clean premium format.",
   },
   {
-    title: "Cloud Architecture",
-    desc: "Design and delivery for scalable infrastructure, hosting, CI/CD, and security basics.",
-    items: ["AWS setup", "Deployment pipelines", "Scaling", "Cost optimization"],
+    title: "Interview Prep",
+    desc: "Mock interviews, feedback, and a question bank tailored to your role.",
   },
   {
-    title: "Data & Analytics",
-    desc: "From pipelines to reporting—build reliable data foundations for decision-making.",
-    items: ["ETL/ELT", "Warehousing", "Reporting", "Data quality"],
+    title: "Career Strategy",
+    desc: "Weekly plan for networking, applications, and skill upgrades.",
   },
   {
-    title: "Product & Delivery",
-    desc: "Execution support—requirements, roadmaps, sprint planning, and stakeholder updates.",
-    items: ["Discovery workshops", "Roadmaps", "Agile delivery", "Documentation"],
+    title: "LinkedIn Makeover",
+    desc: "Headline, about section, keywords, and recruiter-friendly profile.",
   },
   {
-    title: "Performance & Cleanup",
-    desc: "Stabilize and improve existing systems—speed, quality, security, and maintainability.",
-    items: ["Refactors", "Bug fixes", "Performance", "Hardening"],
+    title: "Portfolio / Projects",
+    desc: "Present your work like a product—story, visuals, and proof.",
   },
   {
-    title: "Consulting Retainer",
-    desc: "Ongoing support for teams that need fast, reliable help without hiring full-time.",
-    items: ["Weekly support", "Feature builds", "Advisory", "Priority fixes"],
+    title: "Consultation",
+    desc: "Clear next steps based on your profile and target roles.",
   },
 ];
 
 export default function Services() {
   return (
-    <motion.div
-      variants={page}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.35 }}
-      className="min-h-[calc(100vh-72px)] bg-black text-white"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-semibold">Services</h1>
-        <p className="mt-4 text-white/70 max-w-2xl">
-          Pick a service, or book a consultation and we’ll shape the right plan for your goals.
-        </p>
+    <AppLayout>
+      <motion.div
+        variants={page}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: 0.35 }}
+        className="mx-auto max-w-6xl px-4 py-10 text-white"
+      >
+        <motion.h1 {...fadeUp(0)} className="text-4xl font-semibold">
+          Services
+        </motion.h1>
+        <motion.p {...fadeUp(0.1)} className="mt-4 text-white/70 max-w-3xl">
+          Choose what you need. Each service is delivered with a premium, clear,
+          step-by-step process.
+        </motion.p>
 
-        <motion.div
-          variants={container}
-          initial="initial"
-          animate="animate"
-          className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {services.map((s) => (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((c, i) => (
             <motion.div
-              key={s.title}
-              variants={card}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition"
+              key={c.title}
+              {...fadeUp(0.08 + i * 0.03)}
+              className="glass rounded-3xl p-6"
             >
-              <div className="text-xl font-medium">{s.title}</div>
-              <div className="mt-2 text-white/70 text-sm leading-relaxed">{s.desc}</div>
-
-              <ul className="mt-4 space-y-2 text-sm text-white/70">
-                {s.items.map((it) => (
-                  <li key={it}>• {it}</li>
-                ))}
-              </ul>
+              <div className="text-lg font-semibold">{c.title}</div>
+              <div className="mt-2 text-white/70 text-sm">{c.desc}</div>
+              <div className="mt-5 flex gap-2">
+                <a className="btn-blue" href="/contact">
+                  Enquire
+                </a>
+                <a className="btn-outline" href="/auth?mode=signup">
+                  Get Started
+                </a>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div>
-            <div className="text-lg font-medium">Want a custom package?</div>
-            <div className="text-white/70 text-sm mt-1">
-              Tell us your timeline and scope—we’ll propose a plan.
-            </div>
-          </div>
-          <Link
-            to="/contact"
-            className="px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-white/90 transition"
-          >
-            Contact Us
-          </Link>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </AppLayout>
   );
 }

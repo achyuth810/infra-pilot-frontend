@@ -1,6 +1,13 @@
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Home /> },
-  { path: "/auth", element: <Auth /> },
+  { path: "/about", element: <About /> },
+  { path: "/services", element: <Services /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/auth", element: <Auth /> }
 ]);
