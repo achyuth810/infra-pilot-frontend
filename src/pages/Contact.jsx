@@ -5,6 +5,21 @@ const page = {
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -18 },
 };
+import AppLayout from "../components/AppLayout";
+
+export default function Home() {
+  return (
+    <AppLayout>
+      <div className="mx-auto max-w-6xl px-4 py-10 text-white">
+        {/* Your long scroll content + video sections go here */}
+        <div className="text-4xl font-semibold">Home</div>
+        <div className="mt-4 text-white/70">
+          Add your 4–5 scroll sections here.
+        </div>
+      </div>
+    </AppLayout>
+  );
+}
 
 export default function Contact() {
   return (
