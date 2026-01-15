@@ -28,7 +28,7 @@ export default function About() {
         <motion.h1 {...fadeUp(0)} className="text-4xl font-semibold">
           About
         </motion.h1>
-        <motion.p {...fadeUp(0.1)} className="mt-4 text-white/70 max-w-3xl">
+        <motion.p {...fadeUp(0.1)} className="mt-4 text-black/70 max-w-3xl">
           InfraPilot Tech is a premium consultancy focused on building job-ready
           profiles—resume, interviews, and strategy—delivered with a product-level
           experience.
@@ -55,14 +55,14 @@ export default function About() {
               className="glass rounded-3xl p-6"
             >
               <div className="text-lg font-semibold">{x.t}</div>
-              <div className="mt-2 text-white/70 text-sm">{x.d}</div>
+              <div className="mt-2 text-black/70 text-sm">{x.d}</div>
             </motion.div>
           ))}
         </div>
 
         <motion.div {...fadeUp(0.2)} className="mt-12 glass rounded-3xl p-7">
           <div className="text-2xl font-semibold">What you can edit later</div>
-          <p className="mt-3 text-white/70">
+          <p className="mt-3 text-black/70">
             This page is a clean template—replace text with your finalized story,
             add your photos/videos, and we can enhance with timeline/metrics.
           </p>

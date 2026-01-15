@@ -38,8 +38,8 @@ export default function Navbar() {
                 className="h-10 w-10 rounded-xl object-cover"
               />
               <div className="leading-tight">
-                <div className="text-white font-semibold text-base">InfraPilot Tech</div>
-                <div className="text-white/60 text-xs">Consultancy services</div>
+                <div className="text-black font-semibold text-base">InfraPilot Tech</div>
+                <div className="text-black/60 text-xs">Where Software Skills Convert Into Offers. </div>
               </div>
             </NavLink>
 
@@ -82,7 +82,7 @@ export default function Navbar() {
                   <NavLink
                     key={item.to}
                     to={item.to}
-                    className="rounded-2xl px-4 py-3 bg-white/5 border border-white/10 text-white/85 hover:bg-blue-500/25 transition"
+                    className="rounded-2xl px-4 py-3 bg-black/5 border border-black/10 text-black/85 hover:bg-blue-500/25 transition"
                   >
                     {item.label}
                   </NavLink>
@@ -110,7 +110,7 @@ function NavItem({ to, label }) {
     <NavLink to={to} className="nav-link">
       {({ isActive }) => (
         <span className="relative">
-          <span className={isActive ? "text-white" : ""}>{label}</span>
+          <span className={isActive ? "text-black" : ""}>{label}</span>
           {isActive ? (
             <motion.span
               layoutId="nav-underline"

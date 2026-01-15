@@ -27,7 +27,7 @@ export default function Home() {
         animate="animate"
         exit="exit"
         transition={{ duration: 0.35 }}
-        className="text-white"
+        className="text-black"
       >
         {/* HERO (video/image area) */}
         <section className="relative overflow-hidden rounded-3xl mx-auto max-w-6xl px-4">
@@ -43,20 +43,20 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-black/60" />
             */}
-            <div className="relative px-6 py-16 md:px-10 md:py-20 bg-black/40">
+            <div className="relative px-6 py-16 md:px-10 md:py-20 bg-white/40">
               <motion.h1
                 {...fadeUp(0)}
                 className="text-4xl md:text-6xl font-semibold leading-tight"
               >
                 Premium Career Consulting
-                <span className="block text-white/75">
+                <span className="block text-black/75">
                   We turn skills into offers.
                 </span>
               </motion.h1>
 
               <motion.p
                 {...fadeUp(0.1)}
-                className="mt-5 max-w-2xl text-white/70 text-base md:text-lg"
+                className="mt-5 max-w-2xl text-black/70 text-base md:text-lg"
               >
                 Resume optimization, interview prep, and career strategy with a
                 premium glossy experience across mobile and desktop.
@@ -79,7 +79,7 @@ export default function Home() {
                   (x) => (
                     <div
                       key={x}
-                      className="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 text-white/85 text-sm"
+                      className="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 text-black/85 text-sm"
                     >
                       {x}
                     </div>
@@ -94,7 +94,7 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 py-14 space-y-12">
           <motion.div {...fadeUp(0)} className="glass rounded-3xl p-7 md:p-9">
             <div className="text-2xl font-semibold">Why InfraPilot Tech</div>
-            <p className="mt-3 text-white/70">
+            <p className="mt-3 text-black/70">
               You get clarity, structure, and execution—built like a real product.
               Premium UI, premium delivery.
             </p>
@@ -111,14 +111,14 @@ export default function Home() {
             ].map((c) => (
               <div key={c.t} className="glass rounded-3xl p-6">
                 <div className="text-lg font-semibold">{c.t}</div>
-                <div className="mt-2 text-white/70 text-sm">{c.d}</div>
+                <div className="mt-2 text-black/70 text-sm">{c.d}</div>
               </div>
             ))}
           </motion.div>
 
           <motion.div {...fadeUp(0)} className="glass rounded-3xl p-7 md:p-9">
             <div className="text-2xl font-semibold">Ready to begin?</div>
-            <p className="mt-3 text-white/70">
+            <p className="mt-3 text-black/70">
               Create an account and choose a plan that fits your timeline.
             </p>
             <div className="mt-6 flex gap-3 flex-wrap">

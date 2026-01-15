@@ -16,11 +16,11 @@ export default function Contact() {
         animate="animate"
         exit="exit"
         transition={{ duration: 0.35 }}
-        className="mx-auto max-w-6xl px-4 py-10 text-white"
+        className="mx-auto max-w-6xl px-4 py-10 text-black"
       >
         <div className="max-w-xl mx-auto py-10">
           <h1 className="text-4xl font-semibold">Contact</h1>
-          <p className="mt-4 text-white/70">
+          <p className="mt-4 text-black/70">
             Send a message and we’ll reply with next steps.
           </p>
 
@@ -30,28 +30,28 @@ export default function Contact() {
           >
             <input
               placeholder="Your Name"
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/25"
+              className="w-full p-3 rounded-xl bg-white/5 border border-black/10 outline-none focus:border-white/25"
             />
             <input
               placeholder="Email"
               type="email"
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/25"
+              className="w-full p-3 rounded-xl bg-white/5 border border-black/10 outline-none focus:border-white/25"
             />
             <input
               placeholder="What do you need help with?"
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/25"
+              className="w-full p-3 rounded-xl bg-white/5 border border-black/10 outline-none focus:border-white/25"
             />
             <textarea
               placeholder="Message"
               rows="5"
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/25"
+              className="w-full p-3 rounded-xl bg-white/5 border border-black/10 outline-none focus:border-white/25"
             />
 
             <button className="w-full py-3 rounded-xl bg-white text-black font-medium hover:bg-white/90 transition">
               Send Message
             </button>
 
-            <div className="text-xs text-white/50">
+            <div className="text-xs text-black/50">
               (Form UI only for now — backend/email will be connected later.)
             </div>
           </form>

@@ -17,12 +17,12 @@ export default function Footer() {
                   className="h-[50px] w-[50px] rounded-2xl object-cover"
                 />
                 <div>
-                  <div className="text-white font-semibold">InfraPilot Tech</div>
-                  <div className="text-white/60 text-sm">Consultancy services</div>
+                  <div className="text-black font-semibold">InfraPilot Tech</div>
+                  <div className="text-black/60 text-sm">Consultancy services</div>
                 </div>
               </div>
 
-              <p className="mt-4 text-white/70 text-sm leading-relaxed">
+              <p className="mt-4 text-black/70 text-sm leading-relaxed">
                 We turn skills into offers. Premium guidance, polished delivery, and results you can measure.
               </p>
 
@@ -33,28 +33,28 @@ export default function Footer() {
                   className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600/90 hover:bg-blue-600 transition"
                   aria-label="LinkedIn"
                 >
-                  <FaLinkedin className="text-white text-lg" />
+                  <FaLinkedin className="text-black text-lg" />
                 </a>
                 <a
                   href="#"
                   className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-500/90 hover:bg-pink-500 transition"
                   aria-label="Instagram"
                 >
-                  <FaInstagram className="text-white text-lg" />
+                  <FaInstagram className="text-black text-lg" />
                 </a>
                 <a
                   href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/70 hover:bg-black transition border border-white/15"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/70 hover:bg-white transition border border-white/15"
                   aria-label="X"
                 >
-                  <FaXTwitter className="text-white text-lg" />
+                  <FaXTwitter className="text-black text-lg" />
                 </a>
               </div>
             </div>
 
             {/* Links */}
             <div>
-              <div className="text-white font-semibold">Company</div>
+              <div className="text-black font-semibold">Company</div>
               <div className="mt-3 grid gap-2 text-sm">
                 <FooterLink to="/about" label="About" />
                 <FooterLink to="/services" label="Services" />
@@ -65,21 +65,21 @@ export default function Footer() {
 
             {/* Contact emails */}
             <div>
-              <div className="text-white font-semibold">Contact</div>
-              <div className="mt-3 grid gap-2 text-sm text-white/75">
+              <div className="text-black font-semibold">Contact</div>
+              <div className="mt-3 grid gap-2 text-sm text-black/75">
                 <div>support@infrapilottech.com</div>
                 <div>hello@infrapilottech.com</div>
                 <div>careers@infrapilottech.com</div>
               </div>
-              <div className="mt-4 text-xs text-white/50">
+              <div className="mt-4 text-xs text-black/50">
                 (You can edit these later)
               </div>
             </div>
 
             {/* CTA */}
             <div>
-              <div className="text-white font-semibold">Get started</div>
-              <p className="mt-3 text-sm text-white/70">
+              <div className="text-black font-semibold">Get started</div>
+              <p className="mt-3 text-sm text-black/70">
                 Ready to level up? Create an account and start your plan.
               </p>
               <div className="mt-4 flex gap-2">
@@ -95,10 +95,10 @@ export default function Footer() {
 
           {/* Bottom bar */}
           <div className="mt-8 border-t border-white/10 pt-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-xs text-white/55">
-              Powered by <span className="text-white/75">InfraPilotTech</span>
+            <div className="text-xs text-black/55">
+              Powered by <span className="text-black/75">InfraPilotTech</span>
             </div>
-            <div className="text-xs text-white/55">
+            <div className="text-xs text-black/55">
               © 2016 InfraPilot Tech. All rights reserved.
             </div>
           </div>
@@ -112,7 +112,7 @@ function FooterLink({ to, label }) {
   return (
     <NavLink
       to={to}
-      className="text-white/75 hover:text-white transition"
+      className="text-black/75 hover:text-black transition"
     >
       {label}
     </NavLink>

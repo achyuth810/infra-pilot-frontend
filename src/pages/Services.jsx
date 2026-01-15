@@ -50,12 +50,12 @@ export default function Services() {
         animate="animate"
         exit="exit"
         transition={{ duration: 0.35 }}
-        className="mx-auto max-w-6xl px-4 py-10 text-white"
+        className="mx-auto max-w-6xl px-4 py-10 text-black"
       >
         <motion.h1 {...fadeUp(0)} className="text-4xl font-semibold">
           Services
         </motion.h1>
-        <motion.p {...fadeUp(0.1)} className="mt-4 text-white/70 max-w-3xl">
+        <motion.p {...fadeUp(0.1)} className="mt-4 text-black/70 max-w-3xl">
           Choose what you need. Each service is delivered with a premium, clear,
           step-by-step process.
         </motion.p>
@@ -68,7 +68,7 @@ export default function Services() {
               className="glass rounded-3xl p-6"
             >
               <div className="text-lg font-semibold">{c.title}</div>
-              <div className="mt-2 text-white/70 text-sm">{c.desc}</div>
+              <div className="mt-2 text-black/70 text-sm">{c.desc}</div>
               <div className="mt-5 flex gap-2">
                 <a className="btn-blue" href="/contact">
                   Enquire
