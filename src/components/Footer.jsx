@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="mt-20">
       <div className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="glass rounded-3xl p-6 md:p-8">
+        <div className="bg-slate-100 rounded-3xl p-6 md:p-8 border border-slate-200">
           <div className="grid gap-10 md:grid-cols-4">
             {/* Brand */}
             <div className="md:col-span-1">
