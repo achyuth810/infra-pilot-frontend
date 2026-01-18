@@ -1,35 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ===============================
+   GLOBAL DARK BASE
+================================ */
+@layer base {
+  html,
+  body,
+  #root {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100%;
+  }
+}
+
+/* ===============================
+   COMPONENT STYLES
+================================ */
 @layer components {
-/* Glass for white background */
-.glass {
-  @apply bg-white/70 backdrop-blur-xl border border-slate-200 shadow-lg;
-}
+  /* PREMIUM DARK GLASS (LEATHER MATCH) */
+  .glass {
+    position: relative;
+    @apply rounded-3xl backdrop-blur-2xl border border-white/10;
+    background: rgba(34, 34, 34, 0.75);
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
 
-.glass-strong {
-  @apply bg-white/90 backdrop-blur-2xl border border-slate-300 shadow-xl;
-}
+  .glass-strong {
+    position: relative;
+    @apply rounded-3xl backdrop-blur-3xl border border-white/15;
+    background: rgba(28, 28, 28, 0.85);
+    box-shadow:
+      0 40px 90px rgba(0, 0, 0, 0.85),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
 
-/* Navbar links */
-.nav-link {
-  @apply text-slate-700 hover:text-blue-600 transition relative;
-}
+  .glass::before,
+  .glass-strong::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.02) 40%,
+      rgba(0, 0, 0, 0.1)
+    );
+    pointer-events: none;
+  }
 
-/* Primary button (LinkedIn-style blue) */
-.btn-blue {
-  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold
-  bg-blue-600 text-white border border-blue-600 transition;
-}
-.btn-blue:hover {
-  @apply bg-blue-700 border-blue-700;
-}
+  /* NAV */
+  .nav-link {
+    @apply text-white/85 hover:text-white transition relative;
+  }
 
-/* Outline / secondary button */
-.btn-outline {
-  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold
-  bg-white text-blue-600 border border-blue-300 transition;
-}
-.btn-outline:hover {
-  @apply bg-blue-600 text-white border-blue-600;
+  /* BUTTONS */
+  .btn-blue {
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold bg-blue-600 text-white transition;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+    box-shadow: 0 14px 35px rgba(37, 99, 235, 0.65);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold bg-white/10 text-white border border-white/30 transition;
+  }
+  .btn-outline:hover {
+    @apply bg-white/20;
+  }
+
+  /* MARQUEE / SCROLL */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-scroll {
+    animation: marquee 40s linear infinite;
+  }
 }

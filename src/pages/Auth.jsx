@@ -1,237 +1,194 @@
 import { useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
-import AuthShell from "../components/AuthShell";
+import AppLayout from "../components/AppLayout";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const page = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -18 },
+};
+
+const panel = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+};
+
+function useQueryMode() {
+  const { search } = useLocation();
+  return useMemo(
+    () => new URLSearchParams(search).get("mode") || "login",
+    [search]
+  );
+}
 
 export default function Auth() {
-  const [mode, setMode] = useState("login"); // "login" | "signup"
-
-  // shared
+  const navigate = useNavigate();
+  const modeFromUrl = useQueryMode();
+  const [mode, setMode] = useState(modeFromUrl); // login | signup | forgot
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
 
-  // login fields
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-
-  // signup fields
-  const [fullName, setFullName] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-
-  const title = useMemo(
-    () => (mode === "login" ? "Welcome back" : "Create your account"),
-    [mode]
-  );
-
-  const subtitle = useMemo(
-    () =>
-      mode === "login"
-        ? "Login to continue."
-        : "Join and start your premium journey.",
-    [mode]
-  );
-
-  const submitLogin = async (e) => {
-    e.preventDefault();
-    setErr("");
-    setLoading(true);
-    try {
-      await axios.post(
-        `${API_URL}/auth/login`,
-        { email: loginEmail, password: loginPassword },
-        { withCredentials: true }
-      );
-      window.location.href = "/";
-    } catch (error) {
-      setErr(error?.response?.data?.message || "Login failed.");
-    } finally {
-      setLoading(false);
-    }
+  const setModeAndUrl = (next) => {
+    setMode(next);
+    if (next === "signup") navigate("/auth?mode=signup", { replace: true });
+    else if (next === "forgot") navigate("/auth?mode=forgot", { replace: true });
+    else navigate("/auth", { replace: true });
   };
 
-  const submitSignup = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    setErr("");
     setLoading(true);
-    try {
-      await axios.post(
-        `${API_URL}/auth/signup`,
-        { fullName, email: signupEmail, password: signupPassword },
-        { withCredentials: true }
-      );
-      window.location.href = "/";
-    } catch (error) {
-      setErr(error?.response?.data?.message || "Signup failed.");
-    } finally {
+
+    // Placeholder for Cognito
+    setTimeout(() => {
       setLoading(false);
-    }
+      alert("AWS Cognito will be connected here.");
+    }, 600);
   };
 
   return (
-    <AuthShell title={title} subtitle={subtitle}>
-      {/* Toggle */}
-      <div className="glass rounded-2xl p-1 flex gap-1">
-        <button
-          type="button"
-          onClick={() => setMode("login")}
-          className={[
-            "w-1/2 rounded-2xl px-4 py-2 text-sm font-semibold transition",
-            mode === "login"
-              ? "bg-white text-black"
-              : "text-white/80 hover:text-white",
-          ].join(" ")}
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode("signup")}
-          className={[
-            "w-1/2 rounded-2xl px-4 py-2 text-sm font-semibold transition",
-            mode === "signup"
-              ? "bg-white text-black"
-              : "text-white/80 hover:text-white",
-          ].join(" ")}
-        >
-          Sign up
-        </button>
-      </div>
+    <AppLayout>
+      <motion.div
+        variants={page}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: 0.35 }}
+        className="auth-page"
+      >
+        <div className="w-full max-w-lg">
+          <div className="text-center mb-6">
+            <h1 className="text-4xl font-semibold">
+              {mode === "signup"
+                ? "Create your account"
+                : mode === "forgot"
+                ? "Reset password"
+                : "Welcome back"}
+            </h1>
+            <p className="mt-3 text-white/70">
+              {mode === "signup"
+                ? "Start your journey with InfraPilot Tech."
+                : mode === "forgot"
+                ? "Enter your email to reset your password."
+                : "Log in to continue."}
+            </p>
+          </div>
 
-      {/* Error */}
-      {err ? (
-        <div className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
-          {err}
+          {/* Tabs */}
+          <div className="glass rounded-3xl p-2 flex gap-2 mb-4">
+            <button
+              onClick={() => setModeAndUrl("login")}
+              className={`flex-1 rounded-2xl px-4 py-2 text-sm font-semibold transition ${
+                mode === "login"
+                  ? "bg-blue-600 text-white"
+                  : "text-white/80 hover:bg-white/10"
+              }`}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => setModeAndUrl("signup")}
+              className={`flex-1 rounded-2xl px-4 py-2 text-sm font-semibold transition ${
+                mode === "signup"
+                  ? "bg-blue-600 text-white"
+                  : "text-white/80 hover:bg-white/10"
+              }`}
+            >
+              Sign up
+            </button>
+          </div>
+
+          {/* Card */}
+          <div className="auth-card">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={mode}
+                variants={panel}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <form onSubmit={onSubmit} className="space-y-4">
+                  {mode === "signup" && (
+                    <>
+                      <input className="auth-input" placeholder="Full Name" />
+                      <input className="auth-input" placeholder="Email" />
+                      <input
+                        className="auth-input"
+                        placeholder="Password"
+                        type="password"
+                      />
+                      <input
+                        className="auth-input"
+                        placeholder="Confirm Password"
+                        type="password"
+                      />
+                    </>
+                  )}
+
+                  {mode === "login" && (
+                    <>
+                      <input className="auth-input" placeholder="Email" />
+                      <input
+                        className="auth-input"
+                        placeholder="Password"
+                        type="password"
+                      />
+                      <div className="flex justify-between items-center">
+                        <label className="text-xs text-white/70">
+                          <input type="checkbox" className="mr-2 accent-blue-600" />
+                          Remember me
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setModeAndUrl("forgot")}
+                          className="auth-link"
+                        >
+                          Forgot password?
+                        </button>
+                      </div>
+                    </>
+                  )}
+
+                  {mode === "forgot" && (
+                    <>
+                      <input className="auth-input" placeholder="Email" />
+                      <div className="text-xs text-white/60">
+                        Reset link will be sent via email.
+                      </div>
+                    </>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="btn-blue w-full py-3"
+                  >
+                    {loading
+                      ? "Please wait..."
+                      : mode === "signup"
+                      ? "Create account"
+                      : mode === "forgot"
+                      ? "Send reset link"
+                      : "Login"}
+                  </button>
+
+                  {mode === "forgot" && (
+                    <button
+                      type="button"
+                      onClick={() => setModeAndUrl("login")}
+                      className="btn-outline w-full py-3"
+                    >
+                      Back to Login
+                    </button>
+                  )}
+                </form>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-      ) : null}
-
-      {/* Animated forms */}
-      <div className="relative mt-5">
-        <AnimatePresence mode="wait">
-          {mode === "login" ? (
-            <motion.form
-              key="login"
-              onSubmit={submitLogin}
-              initial={{ opacity: 0, x: -22 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 22 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="grid gap-4"
-            >
-              <div>
-                <label className="text-sm text-white/70">Email</label>
-                <input
-                  className="mt-1 w-full rounded-2xl bg-white/10 border border-white/15 px-4 py-3 outline-none focus:border-white/35"
-                  type="email"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  placeholder="you@email.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-white/70">Password</label>
-                <input
-                  className="mt-1 w-full rounded-2xl bg-white/10 border border-white/15 px-4 py-3 outline-none focus:border-white/35"
-                  type="password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
-
-              <button
-                disabled={loading}
-                className="btn-solid w-full justify-center inline-flex"
-                type="submit"
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-
-              <div className="flex justify-between text-sm text-white/70">
-                <a className="hover:text-white transition" href="/forgot-password">
-                  Forgot password?
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setMode("signup")}
-                  className="hover:text-white transition"
-                >
-                  New user? Sign up
-                </button>
-              </div>
-            </motion.form>
-          ) : (
-            <motion.form
-              key="signup"
-              onSubmit={submitSignup}
-              initial={{ opacity: 0, x: 22 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -22 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="grid gap-4"
-            >
-              <div>
-                <label className="text-sm text-white/70">Full name</label>
-                <input
-                  className="mt-1 w-full rounded-2xl bg-white/10 border border-white/15 px-4 py-3 outline-none focus:border-white/35"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Akshitha"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-white/70">Email</label>
-                <input
-                  className="mt-1 w-full rounded-2xl bg-white/10 border border-white/15 px-4 py-3 outline-none focus:border-white/35"
-                  type="email"
-                  value={signupEmail}
-                  onChange={(e) => setSignupEmail(e.target.value)}
-                  placeholder="you@email.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-white/70">Password</label>
-                <input
-                  className="mt-1 w-full rounded-2xl bg-white/10 border border-white/15 px-4 py-3 outline-none focus:border-white/35"
-                  type="password"
-                  value={signupPassword}
-                  onChange={(e) => setSignupPassword(e.target.value)}
-                  placeholder="Create a strong password"
-                  required
-                />
-              </div>
-
-              <button
-                disabled={loading}
-                className="btn-solid w-full justify-center inline-flex"
-                type="submit"
-              >
-                {loading ? "Creating..." : "Create account"}
-              </button>
-
-              <div className="text-sm text-white/70 text-center">
-                Already have an account?{" "}
-                <button
-                  type="button"
-                  onClick={() => setMode("login")}
-                  className="hover:text-white transition"
-                >
-                  Login
-                </button>
-              </div>
-            </motion.form>
-          )}
-        </AnimatePresence>
-      </div>
-    </AuthShell>
+      </motion.div>
+    </AppLayout>
   );
 }

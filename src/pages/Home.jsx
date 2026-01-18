@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import AppLayout from "../components/AppLayout";
+import LogoMarquee from "../components/LogoMarquee";
+import heroBg from "../assets/images/hero.png";
 
 // If you have a hero video, put it in: src/assets/videos/hero.mp4
 // and uncomment the import below.
@@ -115,6 +117,8 @@ export default function Home() {
               </div>
             ))}
           </motion.div>
+          <LogoMarquee/>
+        
 
           <motion.div {...fadeUp(0)} className="glass rounded-3xl p-7 md:p-9">
             <div className="text-2xl font-semibold">Ready to begin?</div>
