@@ -22,13 +22,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close mobile menu on route change
   useEffect(() => setOpen(false), [location.pathname]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="mx-auto max-w-6xl px-4 pt-4">
-        <div className={`rounded-2xl px-4 py-3 transition ${scrolled ? "glass-strong" : "glass"}`}>
+        <div
+          className={`rounded-2xl px-4 py-3 transition ${
+            scrolled ? "glass-strong" : "glass"
+          }`}
+        >
           <div className="flex items-center justify-between">
             {/* Brand */}
             <NavLink to="/" className="flex items-center gap-3">
@@ -38,8 +41,12 @@ export default function Navbar() {
                 className="h-10 w-10 rounded-xl object-cover"
               />
               <div className="leading-tight">
-                <div className="text-black font-semibold text-base">InfraPilot Tech</div>
-                <div className="text-black/60 text-xs">Where Software Skills Convert Into Offers. </div>
+                <div className="text-white font-semibold text-base">
+                  InfraPilot Tech
+                </div>
+                <div className="text-white/60 text-xs">
+                  Where Software Skills Convert Into Offers.
+                </div>
               </div>
             </NavLink>
 
@@ -82,7 +89,7 @@ export default function Navbar() {
                   <NavLink
                     key={item.to}
                     to={item.to}
-                    className="rounded-2xl px-4 py-3 bg-black/5 border border-black/10 text-black/85 hover:bg-blue-500/25 transition"
+                    className="rounded-2xl px-4 py-3 bg-white/5 border border-white/10 text-white/85 hover:bg-blue-600/20 transition"
                   >
                     {item.label}
                   </NavLink>
@@ -110,11 +117,11 @@ function NavItem({ to, label }) {
     <NavLink to={to} className="nav-link">
       {({ isActive }) => (
         <span className="relative">
-          <span className={isActive ? "text-black" : ""}>{label}</span>
+          <span className={isActive ? "text-white" : ""}>{label}</span>
           {isActive ? (
             <motion.span
               layoutId="nav-underline"
-              className="absolute -bottom-2 left-0 right-0 h-[2px] rounded-full bg-blue-400"
+              className="absolute -bottom-2 left-0 right-0 h-[2px] rounded-full bg-blue-500"
             />
           ) : null}
         </span>
