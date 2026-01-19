@@ -33,7 +33,7 @@ export default function Home() {
         className="text-black"
       >
         {/* HERO */}
-        <section className="relative overflow-hidden rounded-3xl mx-auto max-w-6xl px-4">
+        <section className="relative overflow-hidden rounded-3xl mx-auto max-w-6xl px-4 pt-24">
           <div className="relative mt-2 rounded-3xl overflow-hidden glass h-[520px]">
             {/* VIDEO */}
             <video
