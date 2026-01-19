@@ -1,15 +1,31 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaLinkedin, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import logo50 from "../assets/images/logo50.png";
+import { getCurrentUser, signOut } from "aws-amplify/auth";
 
 export default function Footer() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getCurrentUser()
+      .then(setUser)
+      .catch(() => setUser(null));
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut();
+    setUser(null);
+  };
+
   return (
     <footer className="mt-20">
       <div className="mx-auto max-w-6xl px-4 pb-10">
         <div className="glass-strong rounded-3xl p-6 md:p-8">
           <div className="grid gap-10 md:grid-cols-4">
+            
             {/* Brand */}
-            <div className="md:col-span-1">
+            <div>
               <div className="flex items-center gap-3">
                 <img
                   src={logo50}
@@ -17,8 +33,12 @@ export default function Footer() {
                   className="h-[50px] w-[50px] rounded-2xl object-cover"
                 />
                 <div>
-                  <div className="text-white font-semibold">InfraPilot Tech</div>
-                  <div className="text-white/60 text-sm">Consultancy services</div>
+                  <div className="text-white font-semibold">
+                    InfraPilot Tech
+                  </div>
+                  <div className="text-white/60 text-sm">
+                    Consultancy services
+                  </div>
                 </div>
               </div>
 
@@ -27,55 +47,58 @@ export default function Footer() {
                 and results you can measure.
               </p>
 
-              {/* Social */}
+              {/* Social Icons */}
               <div className="mt-5 flex items-center gap-3">
                 <a
-                  href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600/90 hover:bg-blue-600 transition"
-                  aria-label="LinkedIn"
+                  href="https://www.linkedin.com/company/infrapilot-tech/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <FaLinkedin className="text-white text-lg" />
+                  <Icon bg="bg-blue-600/90">
+                    <FaLinkedin />
+                  </Icon>
                 </a>
 
                 <a
-                  href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-500/90 hover:bg-pink-500 transition"
-                  aria-label="Instagram"
+                  href="https://www.instagram.com/infrapilot.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <FaInstagram className="text-white text-lg" />
+                  <Icon bg="bg-pink-500/90">
+                    <FaInstagram />
+                  </Icon>
                 </a>
 
+                {/* X icon redirects to LinkedIn */}
                 <a
-                  href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 hover:bg-white/15 transition border border-white/15"
-                  aria-label="X"
+                  href="https://www.linkedin.com/company/infrapilot-tech/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <FaXTwitter className="text-white text-lg" />
+                  <Icon bg="bg-white/10">
+                    <FaXTwitter />
+                  </Icon>
                 </a>
               </div>
             </div>
 
-            {/* Links */}
+            {/* Company */}
             <div>
               <div className="text-white font-semibold">Company</div>
               <div className="mt-3 grid gap-2 text-sm">
                 <FooterLink to="/about" label="About" />
                 <FooterLink to="/services" label="Services" />
                 <FooterLink to="/contact" label="Contact" />
-                <FooterLink to="/privacy" label="Privacy Policy" />
               </div>
             </div>
 
-            {/* Contact emails */}
+            {/* Contact */}
             <div>
               <div className="text-white font-semibold">Contact</div>
               <div className="mt-3 grid gap-2 text-sm text-white/75">
                 <div>support@infrapilottech.com</div>
                 <div>hello@infrapilottech.com</div>
                 <div>careers@infrapilottech.com</div>
-              </div>
-              <div className="mt-4 text-xs text-white/50">
-                (You can edit these later)
               </div>
             </div>
 
@@ -86,20 +109,28 @@ export default function Footer() {
                 Ready to level up? Create an account and start your plan.
               </p>
               <div className="mt-4 flex gap-2">
-                <NavLink to="/auth" className="btn-outline">
-                  Login
-                </NavLink>
-                <NavLink to="/auth?mode=signup" className="btn-blue">
-                  Sign up
-                </NavLink>
+                {user ? (
+                  <button onClick={handleLogout} className="btn-outline">
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <NavLink to="/auth" className="btn-outline">
+                      Login
+                    </NavLink>
+                    <NavLink to="/auth?mode=signup" className="btn-blue">
+                      Sign up
+                    </NavLink>
+                  </>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Bottom bar */}
+          {/* Bottom Bar */}
           <div className="mt-8 border-t border-white/15 pt-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div className="text-xs text-white/55">
-              Powered by <span className="text-white/75">InfraPilotTech</span>
+              Powered by <span className="text-white/75">InfraPilot Tech</span>
             </div>
             <div className="text-xs text-white/55">
               © 2016 InfraPilot Tech. All rights reserved.
@@ -116,5 +147,15 @@ function FooterLink({ to, label }) {
     <NavLink to={to} className="text-white/75 hover:text-white transition">
       {label}
     </NavLink>
+  );
+}
+
+function Icon({ bg, children }) {
+  return (
+    <div
+      className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl ${bg} hover:opacity-90 transition`}
+    >
+      <span className="text-white text-lg">{children}</span>
+    </div>
   );
 }

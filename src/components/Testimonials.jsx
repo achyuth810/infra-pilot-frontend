@@ -18,12 +18,14 @@ export default function Testimonials() {
     <section className="mt-20">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-semibold text-white">What Our Clients Say</h2>
-        <p className="mt-3 text-white/70 max-w-2xl">
+        <p className="mt-3 text-white/100 max-w-2xl">
           Real stories from professionals who turned skills into interview calls.
         </p>
 
-        {/* Premium glass container (NO side fades) */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white/25 backdrop-blur-2xl border border-white/25 shadow-2xl">
+        {/* FIXED: Using .premium-box for the exact Hero color. 
+            Removed manual bg-white/25 and border-white/25.
+        */}
+        <div className="mt-10 overflow-hidden premium-box">
           <div className="flex gap-6 px-8 py-10 animate-scroll hover:[animation-play-state:paused]">
             {[...testimonials, ...testimonials].map((t, i) => (
               <TestimonialCard key={i} {...t} />

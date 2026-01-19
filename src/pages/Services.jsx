@@ -124,7 +124,7 @@ export default function Services() {
             >
               <div>
                 <h3 className="text-xl font-semibold">{plan.title}</h3>
-                <div className="mt-2 text-3xl font-bold text-blue-400">
+                <div className="mt-2 text-3xl font-bold text-blue-500">
                   {plan.price}
                 </div>
 

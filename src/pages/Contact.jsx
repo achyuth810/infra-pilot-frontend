@@ -1,88 +1,85 @@
 import { motion } from "framer-motion";
 import AppLayout from "../components/AppLayout";
-import contactImg from "../assets/images/contact1.png";
-
-const page = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -18 },
-};
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, delay },
-  viewport: { once: true },
-});
+import ContactSection from "../sections/ContactSection";
 
 export default function Contact() {
   return (
     <AppLayout>
       <motion.div
-        variants={page}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        transition={{ duration: 0.35 }}
-        className="mx-auto max-w-6xl px-4 py-16 text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="pb-20"
       >
-        <div className="grid gap-12 md:grid-cols-2 items-center">
-          {/* ================= LEFT : INFO ================= */}
-          <motion.div {...fadeUp(0)}>
-            <h1 className="text-4xl font-semibold">Contact Us</h1>
-            <p className="mt-4 text-white/70 leading-relaxed">
-              Tell us about your goals, background, or challenges.  
-              Our team will review your details and guide you with the next steps.
-            </p>
+        {/* Main contact form + image */}
+        <ContactSection />
 
-            <img
-              src={contactImg}
-              alt="Contact InfraPilot Tech"
-              className="mt-8 w-full rounded-3xl object-cover shadow-xl"
-            />
-          </motion.div>
+        {/* ================= CONTACT INFO (BOTTOM) ================= */}
+        <section className="mx-auto max-w-6xl px-4 mt-16">
+          <div className="glass-strong rounded-3xl p-7 md:p-9">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+              
+              {/* Left info */}
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold text-white">
+                  Contact InfraPilot Tech
+                </h3>
 
-          {/* ================= RIGHT : FORM ================= */}
-          <motion.div {...fadeUp(0.1)} className="glass rounded-3xl p-6">
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="space-y-4"
-            >
-              <input
-                placeholder="Your Name"
-                className="w-full p-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/50 outline-none focus:border-blue-500 transition"
-              />
+                <p className="mt-3 text-white/75 max-w-xl leading-relaxed">
+                  Have questions or want to get started? Reach out anytime —
+                  we’ll guide you with the next steps.
+                </p>
 
-              <input
-                placeholder="Email"
-                type="email"
-                className="w-full p-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/50 outline-none focus:border-blue-500 transition"
-              />
+                <div className="mt-6 space-y-4 text-white/85">
+                  <div>
+                    <div className="text-sm text-white/60">Email</div>
+                    <a
+                      href="mailto:support@infrapilottech.com"
+                      className="underline underline-offset-4 hover:text-white"
+                    >
+                      support@infrapilottech.com
+                    </a>
+                  </div>
 
-              <input
-                placeholder="What do you need help with?"
-                className="w-full p-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/50 outline-none focus:border-blue-500 transition"
-              />
+                  <div>
+                    <div className="text-sm text-white/60">Phone</div>
+                    <a
+                      href="tel:+19713793060"
+                      className="underline underline-offset-4 hover:text-white"
+                    >
+                      +1 (971) 379-3060
+                    </a>
+                  </div>
 
-              <textarea
-                placeholder="Message"
-                rows="5"
-                className="w-full p-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/50 outline-none focus:border-blue-500 transition"
-              />
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition"
-              >
-                Send Message
-              </button>
-
-              <div className="text-xs text-white/50 text-center">
-                This form will be connected to backend email & CRM services.
+                  <div>
+                    <div className="text-sm text-white/60">Address</div>
+                    <div className="leading-relaxed text-white/80">
+                      14205 N Mo Pac Expy Ste 570<br />
+                      PMB 350257<br />
+                      Austin, Texas 78728-6529<br />
+                      United States
+                    </div>
+                  </div>
+                </div>
               </div>
-            </form>
-          </motion.div>
-        </div>
+
+              {/* Right actions */}
+              <div className="flex flex-col gap-3 min-w-[220px]">
+                <a href="tel:+19713793060" className="btn-blue text-center">
+                  Call Now
+                </a>
+
+                <a
+                  href="mailto:support@infrapilottech.com"
+                  className="btn-outline text-center"
+                >
+                  Email Us
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section>
       </motion.div>
     </AppLayout>
   );

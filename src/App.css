@@ -40,3 +40,7 @@
 .read-the-docs {
   color: #888;
 }
+.glass:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}

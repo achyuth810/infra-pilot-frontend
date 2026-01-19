@@ -13,7 +13,7 @@ export default function AppLayout({ children }) {
       {/* dark overlay for readability */}
       <div className="min-h-screen bg-black/1">
         <Navbar />
-        <main className="pt-24 text-white">{children}</main>
+        <main className="pt-12 text-white">{children}</main>
         <Footer />
       </div>
     </div>

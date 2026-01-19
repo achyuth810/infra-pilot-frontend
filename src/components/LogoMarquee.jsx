@@ -1,4 +1,4 @@
-const LOGO_TOKEN = "pk_HB3rxzYoRom5NQ4GIIUYCQ";
+const LOGO_TOKEN = import.meta.env.VITE_LOGO_TOKEN;
 
 const logos = [
   "tesla.com",
@@ -30,7 +30,7 @@ export default function LogoMarquee() {
         </p>
 
         {/* Glossy marquee */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-white/30 backdrop-blur-2xl border border-white/30 shadow-2xl">
+        <div className="mt-10 overflow-hidden rounded-3xl glass">
           <div className="flex items-center gap-16 px-10 py-10 animate-marquee hover:[animation-play-state:paused]">
             {[...logos, ...logos].map((domain, i) => (
               <img

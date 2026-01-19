@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import logo from "../assets/images/logo40.png";
+import {
+  getCurrentUser,
+  fetchUserAttributes,
+  signOut,
+} from "aws-amplify/auth";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -13,8 +18,12 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [userName, setUserName] = useState(null);
   const location = useLocation();
 
+  /* =========================
+     Scroll glass effect
+  ========================= */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
@@ -22,7 +31,34 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [location.pathname]);
+  /* =========================
+     Close mobile menu on route change
+  ========================= */
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  /* =========================
+     Load logged-in user name
+  ========================= */
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        await getCurrentUser(); // confirms session
+        const attrs = await fetchUserAttributes();
+        setUserName(attrs.name); // 👈 real display name
+      } catch {
+        setUserName(null);
+      }
+    };
+
+    loadUser();
+  }, [location.pathname]);
+
+  const handleLogout = async () => {
+    await signOut();
+    setUserName(null);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -57,14 +93,27 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Desktop Buttons */}
+            {/* Desktop Auth */}
             <div className="hidden md:flex items-center gap-2">
-              <NavLink to="/auth" className="btn-outline">
-                Login
-              </NavLink>
-              <NavLink to="/auth?mode=signup" className="btn-blue">
-                Sign up
-              </NavLink>
+              {userName ? (
+                <>
+                  <div className="text-xs text-white/70 px-3">
+                    Hi, {userName}
+                  </div>
+                  <button onClick={handleLogout} className="btn-outline">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink to="/auth?mode=login" className="btn-outline">
+                    Login
+                  </NavLink>
+                  <NavLink to="/auth?mode=signup" className="btn-blue">
+                    Sign up
+                  </NavLink>
+                </>
+              )}
             </div>
 
             {/* Mobile toggle */}
@@ -78,7 +127,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu */}
-          {open ? (
+          {open && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -96,16 +145,33 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <NavLink to="/auth" className="btn-outline w-full">
-                  Login
-                </NavLink>
-                <NavLink to="/auth?mode=signup" className="btn-blue w-full">
-                  Sign up
-                </NavLink>
+              <div className="grid gap-2">
+                {userName ? (
+                  <button
+                    onClick={handleLogout}
+                    className="btn-outline w-full"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <NavLink
+                      to="/auth?mode=login"
+                      className="btn-outline w-full"
+                    >
+                      Login
+                    </NavLink>
+                    <NavLink
+                      to="/auth?mode=signup"
+                      className="btn-blue w-full"
+                    >
+                      Sign up
+                    </NavLink>
+                  </>
+                )}
               </div>
             </motion.div>
-          ) : null}
+          )}
         </div>
       </div>
     </header>
@@ -118,12 +184,12 @@ function NavItem({ to, label }) {
       {({ isActive }) => (
         <span className="relative">
           <span className={isActive ? "text-white" : ""}>{label}</span>
-          {isActive ? (
+          {isActive && (
             <motion.span
               layoutId="nav-underline"
               className="absolute -bottom-2 left-0 right-0 h-[2px] rounded-full bg-blue-500"
             />
-          ) : null}
+          )}
         </span>
       )}
     </NavLink>
