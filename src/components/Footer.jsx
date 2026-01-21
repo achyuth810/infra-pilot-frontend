@@ -97,7 +97,7 @@ export default function Footer() {
               <div className="text-white font-semibold">Contact</div>
               <div className="mt-3 grid gap-2 text-sm text-white/75">
                 <div>support@infrapilottech.com</div>
-                <div>hello@infrapilottech.com</div>
+                <div>info@infrapilottech.com</div>
                 <div>careers@infrapilottech.com</div>
               </div>
             </div>

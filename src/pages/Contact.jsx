@@ -37,20 +37,20 @@ export default function Contact() {
               <div>
                 <div className="text-xs text-white/50">General Enquiry</div>
                 <a
-                  href="mailto:support@infrapilottech.com"
+                  href="mailto:info@infrapilottech.com"
                   className="block underline underline-offset-4 hover:text-white"
                 >
-                  support@infrapilottech.com
+                  info@infrapilottech.com
                 </a>
               </div>
 
               <div>
-                <div className="text-xs text-white/50">Business / Partnerships</div>
+                <div className="text-xs text-white/50">Student Support</div>
                 <a
-                  href="mailto:hello@infrapilottech.com"
+                  href="mailto:support@infrapilottech.com"
                   className="block underline underline-offset-4 hover:text-white"
                 >
-                  hello@infrapilottech.com
+                  support@infrapilottech.com
                 </a>
               </div>
 
