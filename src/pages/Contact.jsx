@@ -69,12 +69,15 @@ export default function Contact() {
           {/* Phone */}
           <div>
             <div className="text-sm text-white/60">Phone</div>
-            <a
-              href="tel:+19713793060"
-              className="underline underline-offset-4 hover:text-white"
-            >
-              +1 (971) 379-3060
-            </a>
+            <div class="flex gap-3 items-center">
+  <a href="tel:+12104574056" class="underline">
+    +1 (210) 457 4056
+  </a>
+  <span class="opacity-50">•</span>
+  <a href="tel:+17374087046" class="underline">
+    +1 (737) 408 7046
+  </a>
+</div>
           </div>
 
           {/* Address */}

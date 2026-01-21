@@ -19,7 +19,6 @@
    COMPONENTS
 ================================ */
 @layer components {
-  /* 1. Fixed the 'Hero Gray' look */
   .premium-box {
     position: relative;
     @apply rounded-2xl border border-white/40 backdrop-blur-xl;
@@ -28,6 +27,7 @@
       0 10px 30px rgba(0, 0, 0, 0.25),
       inset 0 1px 1px rgba(255, 255, 255, 0.15);
   }
+
   .glass {
     position: relative;
     @apply rounded-2xl border border-white/40 backdrop-blur-xl;
@@ -37,6 +37,7 @@
       inset 0 1px 1px rgba(255, 255, 255, 0.15);
     transition: transform 220ms ease, box-shadow 220ms ease;
   }
+
   .glass-strong {
     position: relative;
     @apply rounded-3xl border border-white/20 backdrop-blur-2xl;
@@ -48,35 +49,30 @@
     @apply rounded-3xl border border-white/10 backdrop-blur-2xl;
     background: rgba(255, 255, 255, 0.25);
   }
-  @layer components {
-    .auth-page {
-      @apply min-h-screen flex items-center justify-center px-4;
-    }
-  
-    .auth-card {
-      @apply glass p-8 rounded-3xl;
-    }
-  
-    /* 🔥 Rich black premium input */
-    .auth-input {
-      @apply w-full rounded-xl px-4 py-3
-        bg-white
-        text-black font-semibold
-        placeholder:text-black/50
-        border border-black/10
-        outline-none
-        focus:border-blue-600
-        transition;
-    }
-  
-    .auth-link {
-      @apply text-sm text-blue-600 hover:underline;
-    }
+
+  .auth-page {
+    @apply min-h-screen flex items-center justify-center px-4;
   }
-  
 
+  .auth-card {
+    @apply glass p-8 rounded-3xl;
+  }
 
-  /* 2. Nav, Buttons, and Marquee must stay INSIDE the @layer components block */
+  .auth-input {
+    @apply w-full rounded-xl px-4 py-3
+      bg-white
+      text-black font-semibold
+      placeholder:text-black/50
+      border border-black/10
+      outline-none
+      focus:border-blue-600
+      transition;
+  }
+
+  .auth-link {
+    @apply text-sm text-blue-600 hover:underline;
+  }
+
   .nav-link {
     @apply text-white/85 hover:text-white transition relative;
   }
@@ -85,7 +81,7 @@
     @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold
       bg-blue-600 text-white transition;
   }
-  
+
   .btn-blue:hover {
     @apply bg-blue-700;
     box-shadow: 0 14px 35px rgba(37, 99, 235, 0.65);
@@ -95,7 +91,7 @@
     @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold
       bg-white/10 text-white border border-white/30 transition;
   }
-  
+
   .btn-outline:hover {
     @apply bg-white/20;
   }
@@ -103,16 +99,16 @@
   .animate-marquee {
     animation: marquee 15s linear infinite;
   }
-  
+
   .animate-scroll {
     animation: marquee 30s linear infinite;
   }
-} /* <--- This closing brace was missing or misplaced in your version */
+}
 
 /* ===============================
    KEYFRAMES (Must be outside @layer)
 ================================ */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
