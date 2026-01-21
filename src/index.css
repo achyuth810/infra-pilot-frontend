@@ -101,11 +101,11 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
   }
   
   .animate-scroll {
-    animation: marquee 40s linear infinite;
+    animation: marquee 30s linear infinite;
   }
 } /* <--- This closing brace was missing or misplaced in your version */
 
